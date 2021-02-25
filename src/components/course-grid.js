@@ -38,7 +38,8 @@ export default class CourseGrid extends
                                 updateCourse={this.props.updateCourse}
                                 course={course}
                                 title={course.title}
-                            />)
+                                lastModified={course.lastModified}
+                                owner={course.owner}/>)
                     }
                 </div>
             </div>)
