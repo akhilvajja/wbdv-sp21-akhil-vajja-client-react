@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
 import TopicPills from "./topic-pills";
+import WidgetList from "../widgets/widget-list";
 
 const reducer = combineReducers({
     moduleReducer: moduleReducer,
@@ -38,6 +39,7 @@ const CourseEditor = ({history, params}) => {
                     <br/>
                     <TopicPills/>
                     <br/>
+                    <WidgetList/>
                 </div>
             </div>
         </Provider>)
