@@ -38,7 +38,7 @@ const widgetReducer = (state = initialState, action) => {
                     }
                 })
             }
-        case "FIND_ALL_WIDGETS_FOR_TOPIC":
+        case "FIND_WIDGETS_FOR_TOPIC":
             return {
                 ...state,
                 widgets: action.widgets

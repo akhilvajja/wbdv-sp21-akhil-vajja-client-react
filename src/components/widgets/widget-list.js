@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
-
+const WIDGETS_URL = process.env.REACT_APP_WIDGET_URL
 
 const WidgetList = () => {
     const {topicId} = useParams()
@@ -11,14 +11,14 @@ const WidgetList = () => {
     const [widget, setWidget] = useState({})
     useEffect(() => {
         // TODO: move all server communication to widgets-service.js
-        fetch(`http://localhost:8080/api/topics/${topicId}/widgets`)
+        fetch(`${WIDGETS_URL}/topics/${topicId}/widgets`)
             .then(response => response.json())
             .then(widgets => setWidgets(widgets))
     }, [topicId])
 
     const createWidget = () => {
         // TODO: move all server communication to widgets-service
-        fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
+        fetch(`${WIDGETS_URL}/topics/${topicId}/widgets`, {
             method: 'POST',
             body: JSON.stringify({type: "HEADING", size: 1, text: "New Widget"}),
             headers: {
@@ -31,7 +31,7 @@ const WidgetList = () => {
 
     const deleteWidget = (id) =>
         // TODO: move all server communication to widgets-service.js
-        fetch(`http://localhost:8080/api/widgets/${id}`, {
+        fetch(`${WIDGETS_URL}/widgets/${id}`, {
             method: "DELETE"
         }).then((status) => {
             setWidgets((widgets) => widgets.filter(w => w.id !== id))
@@ -39,7 +39,7 @@ const WidgetList = () => {
 
     const updateWidget = (id, widget) =>
         // TODO: move all server communication to widgets-service.js
-        fetch(`http://localhost:8080/api/widgets/${id}`, {
+        fetch(`${WIDGETS_URL}/widgets/${id}`, {
             method: "PUT",
             body: JSON.stringify(widget),
             headers: {

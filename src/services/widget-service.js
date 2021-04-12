@@ -1,34 +1,37 @@
-const TOPICS_URL = "https://wbdv-generic-server.herokuapp.com/api/001304749/topics"
-const WIDGETS_URL = "https://wbdv-generic-server.herokuapp.com/api/001304749/widgets"
+import React, {useState, useEffect} from 'react'
 
-export const createWidget = (tid, widget) =>
-    fetch(`${TOPICS_URL}/${tid}/widgets`, {
-        method: "POST",
-        body: JSON.stringify(widget),
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-        .then(response => response.json());
+const WIDGETS_URL = process.env.REACT_APP_WIDGET_URL
 
-export const updateWidget = (wid, widget) =>
-    fetch(`${WIDGETS_URL}/${wid}`, {
-        method: "PUT",
-        body: JSON.stringify(widget),
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-        .then(response => response.json());
 
-export const findWidgetsForTopic = (tid) =>
-    fetch(`${TOPICS_URL}/${tid}/widgets`)
-        .then(response => response.json());
+    export const createWidget = (tid, widget) => {
+        // TODO: move all server communication to widgets-service
+        fetch(`${WIDGETS_URL}/topics/${tid}/widgets`, {
+            method: 'POST',
+            body: JSON.stringify(widget),
+            headers: {
+                "content-type": 'application/json'
+            }
+        })
+            .then(response => response.json());
+    }
 
-export const deleteWidget = (wid) =>
-    fetch(`${WIDGETS_URL}/${wid}`, {
-        method: 'DELETE'
-    })
+    export const deleteWidget = (id) =>
+        // TODO: move all server communication to widgets-service.js
+        fetch(`${WIDGETS_URL}/widgets/${id}`, {
+            method: "DELETE"
+        }).then(response => response.json());
+
+    export const updateWidget = (id, widget) =>
+        // TODO: move all server communication to widgets-service.js
+        fetch(`${WIDGETS_URL}/widgets/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(widget),
+            headers: {
+                "content-type": 'application/json'
+            }
+        }).then(response => response.json());
+    export const findWidgetsForTopic = (tid) =>
+        fetch(`${WIDGETS_URL}/${tid}/topics`)
         .then(response => response.json());
 
 const api = {
