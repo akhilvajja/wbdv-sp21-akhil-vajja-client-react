@@ -6,7 +6,12 @@ const QuizzesList = () => {
     const [quizzes, setQuizzes] = useState([])
     useEffect(() => {
         // TODO: implement this in a separate service file
-        fetch("http://localhost:3000/api/quizzes")
+        fetch("http://localhost:4000/api/quizzes", {
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
             .then(response => response.json())
             .then((quizzes) => {
                 setQuizzes(quizzes)
