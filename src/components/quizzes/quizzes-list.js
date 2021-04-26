@@ -1,17 +1,14 @@
 import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 
+const NODES_URL = process.env.REACT_APP_NODE_URL
+
 const QuizzesList = () => {
     const {courseId} = useParams();
     const [quizzes, setQuizzes] = useState([])
     useEffect(() => {
         // TODO: implement this in a separate service file
-        fetch("http://localhost:4000/api/quizzes", {
-            headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
+        fetch(`${NODES_URL}/quizzes`)
             .then(response => response.json())
             .then((quizzes) => {
                 setQuizzes(quizzes)
